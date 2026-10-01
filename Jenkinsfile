@@ -8,16 +8,9 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                sh 'python3 -m pip install -r requirements.txt'
-                sh 'python3 -m pip install pytest'
-            }
-        }
-
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest'
+                sh 'docker run --rm -v .:/app -w /app python:3.14-slim sh -c "pip install -r requirements.txt && pip install pytest && pytest"'
             }
         }
 
