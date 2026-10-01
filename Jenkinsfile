@@ -8,14 +8,11 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
                 sh '''
-                    docker run --rm \
-                    -v "$PWD:/app" \
-                    -w /app \
-                    python:3.14-slim \
-                    sh -c "pip install -r requirements.txt && pip install pytest && pytest"
+                    docker build -t cicd-demo:test .
+                    docker run --rm cicd-demo:test pytest
                 '''
             }
         }
