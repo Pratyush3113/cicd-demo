@@ -10,20 +10,20 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
-                bat 'python -m pip install pytest'
+                sh 'python3 -m pip install -r requirements.txt'
+                sh 'python3 -m pip install pytest'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'python -m pytest'
+                sh 'python3 -m pytest'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t cicd-demo:jenkins .'
+                sh 'docker build -t cicd-demo:jenkins .'
             }
         }
     }
