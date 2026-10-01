@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                    -v "\C:\Users\HP-GAMING\cicd-demo:/app" \
+                    -v "$PWD:/app" \
                     -w /app \
                     python:3.14-slim \
                     sh -c "pip install -r requirements.txt && pip install pytest && pytest"
